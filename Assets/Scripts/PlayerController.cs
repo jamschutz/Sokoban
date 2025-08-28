@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
     private int _x;
     private int _y;
 
-    private void Start()
-    {
+    private void Start() {
         _x = 0;
         _y = 0;
         Move(0, 0);
@@ -18,20 +16,16 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
+        if (Input.GetKeyDown(KeyCode.UpArrow)) {
             Move(0, 1);
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
+        if (Input.GetKeyDown(KeyCode.DownArrow)) {
             Move(0, -1);
         }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
+        if (Input.GetKeyDown(KeyCode.LeftArrow)) {
             Move(-1, 0);
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
+        if (Input.GetKeyDown(KeyCode.RightArrow)) {
             Move(1, 0);
         }
 
