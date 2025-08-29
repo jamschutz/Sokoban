@@ -34,8 +34,25 @@ public class PlayerController : MonoBehaviour
 
     private void Move(int x, int y)
     {
-        _x += x;
-        _y += y;
-        transform.position = GridController.instance.GridToWorldPos(_x, _y);
+        var targetCell = GridController.instance.GetObjectInCell(_x + x, _y + y);
+        switch(targetCell) {
+            // move to the empty cell
+            case ObjectType.Empty:
+                _x += x;
+                _y += y;
+                transform.position = GridController.instance.GridToWorldPos(_x, _y);
+                break;
+
+            // push the block
+            case ObjectType.Box:
+                break;
+
+            // don't move -- hit a wall
+            case ObjectType.Wall:
+                break;
+            default:
+                Debug.LogError($"unknown object type: {targetCell.ToString()}");
+                break;
+        }
     }
 }
