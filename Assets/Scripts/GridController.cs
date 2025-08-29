@@ -15,14 +15,11 @@ public class GridController : MonoBehaviour
     private Grid _grid;
     private Tilemap _boxesTilemap;
 
-    private TileBase[] _blocks;
-
 
     private void Awake()
     {
         // instance already exists -- can only be one singleton!
-        if (instance != null)
-        {
+        if (instance != null) {
             Destroy(this);
             return;
         }
@@ -30,7 +27,6 @@ public class GridController : MonoBehaviour
         GridController.instance = this;
         _grid = GetComponent<Grid>();
         _boxesTilemap = transform.Find("Blocks").GetComponent<Tilemap>();
-        _blocks = _boxesTilemap.GetTilesBlock(_boxesTilemap.cellBounds);
     }
 
 
