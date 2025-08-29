@@ -45,6 +45,11 @@ public class PlayerController : MonoBehaviour
 
             // push the block
             case ObjectType.Box:
+                var move  = new Vector3Int(x, y, 0);
+                var start = new Vector3Int(_x, _y, 0) + move;
+                var dest  = start + move;
+                GridController.instance.PushBlock(start, dest);
+                Move(x, y);
                 break;
 
             // don't move -- hit a wall

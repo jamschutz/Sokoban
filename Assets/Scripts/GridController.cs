@@ -7,6 +7,8 @@ using UnityEngine.Tilemaps;
 [RequireComponent(typeof(Grid))]
 public class GridController : MonoBehaviour
 {
+    public TileSprite[] _tiles;
+
     // singleton instance
     public static GridController instance;
 
@@ -54,7 +56,41 @@ public class GridController : MonoBehaviour
         }
         return ObjectType.Empty;
     }
+
+
+    public bool CanPushBlock(int x, int y)
+    {
+        return true;
+    }
+
+
+    public void PushBlock(Vector3Int start, Vector3Int dest)
+    {
+        // set starting position empty
+        _boxesTilemap.SetTile(start, GetTile(ObjectType.Empty));
+        // and set destination to the box
+        _boxesTilemap.SetTile(dest, GetTile(ObjectType.Box));
+    }
+
+
+    private Tile GetTile(ObjectType type)
+    {
+        foreach(var t in _tiles) {
+            if(t.type == type)
+                return t.tile;
+        }
+
+        Debug.Log($"couldn't find tile for {type.ToString()} -- did you forget to update the GridController?");
+        return _tiles[0].tile;
+    }
 }
 
 
 public enum ObjectType { Player, Box, Wall, Empty }
+
+[System.Serializable]
+public class TileSprite
+{
+    public ObjectType type;
+    public Tile tile;
+}
