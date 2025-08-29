@@ -47,11 +47,9 @@ public class GridController : MonoBehaviour
             return ObjectType.Empty;
         }
         if(tile.name == "Box") {
-            Debug.Log("hit box");
             return ObjectType.Box;
         }
         if(tile.name == "Wall") {
-            Debug.Log("hit wall");
             return ObjectType.Wall;
         }
         return ObjectType.Empty;
@@ -66,6 +64,12 @@ public class GridController : MonoBehaviour
 
     public void PushBlock(Vector3Int start, Vector3Int dest)
     {
+        // if there's a block in our destination, push it!
+        if(GetObjectInCell(dest.x, dest.y) != ObjectType.Empty) {
+            var dir = dest - start;
+            PushBlock(dest, dest + dir);
+        }
+
         // set starting position empty
         _boxesTilemap.SetTile(start, GetTile(ObjectType.Empty));
         // and set destination to the box
